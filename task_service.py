@@ -8,13 +8,23 @@ def get_next_id(tasks):
     return max(t["id"] for t in tasks) + 1
 
 
-def add_task(title):
-    if not title.strip():
+def add_task(title, priority=1):
+    if not title or not title.strip():
         print("[ERROR] 标题不能为空")
         return
 
-    tasks = load_tasks()
-    task = create_task(get_next_id(tasks), title)
+    try:
+        priority = int(priority)
+    except:
+        priority = 1
+    
+
+    task = create_task(
+        get_next_id(tasks),
+        title,
+        deadline="",
+        priority=1
+    )
 
     tasks.append(task)
     save_tasks(tasks)
@@ -30,7 +40,8 @@ def list_tasks():
         return
 
     for t in tasks:
-        print(f"[{t['id']}] {t['title']} | {t['status']} | {t['created_at']}")
+        print(f"[{t['id']}] {t['title']} | {t['status']} | "
+            f"deadline: {t.get('deadline','-')} | priority: {t.get('priority','-')} | {t['created_at']}")
 
 
 def done_task(task_id):
@@ -50,3 +61,11 @@ def done_task(task_id):
             return
 
     print("[ERROR] 未找到任务")
+
+
+def list_tasks_sorted_by_priority():
+    tasks = load_tasks()
+    tasks.sort(key=lambda x: x.get("priority", 1), reverse=True)
+
+    for t in tasks:
+        print(f"[{t['id']}] {t['title']} | priority:{t.get('priority')}")
