@@ -8,10 +8,16 @@ def get_next_id(tasks):
     return max(t["id"] for t in tasks) + 1
 
 
-def add_task(title):
-    if not title.strip():
+def add_task(title, priority=1):
+    if not title or not title.strip():
         print("[ERROR] 标题不能为空")
         return
+
+    try:
+        priority = int(priority)
+    except:
+        priority = 1
+    
 
     task = create_task(
         get_next_id(tasks),
