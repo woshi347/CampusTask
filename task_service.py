@@ -17,8 +17,9 @@ def add_task(title, priority=1):
         priority = int(priority)
     except:
         priority = 1
-    
 
+    tasks = load_tasks()
+    
     task = create_task(
         get_next_id(tasks),
         title,
@@ -69,3 +70,19 @@ def list_tasks_sorted_by_priority():
 
     for t in tasks:
         print(f"[{t['id']}] {t['title']} | priority:{t.get('priority')}")
+
+
+def search_tasks(keyword):
+    tasks = load_tasks()
+
+    result = []
+    for t in tasks:
+        if keyword.lower() in t["title"].lower():
+            result.append(t)
+
+    if not result:
+        print("[INFO] 没有匹配任务")
+        return
+
+    for t in result:
+        print(f"[{t['id']}] {t['title']} | {t['status']}")

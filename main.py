@@ -22,6 +22,14 @@ def main():
         except:
             print("[ERROR] ID必须是数字")
 
+    elif cmd == "search":
+        from task_service import search_tasks
+        search_tasks(sys.argv[2])
+
+    elif cmd == "sort":
+        from task_service import list_tasks_sorted_by_priority
+        list_tasks_sorted_by_priority()
+
     else:
         print("[ERROR] unknown command")
 
