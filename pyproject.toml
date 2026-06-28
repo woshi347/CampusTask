@@ -1,0 +1,21 @@
+[project]
+name = "campus-task"
+version = "0.2.0"
+description = "CampusTask - a CLI task management system for software engineering lab"
+authors = [{ name = "Zihan Zhang" }]
+
+requires-python = ">=3.8"
+
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --disable-warnings"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
