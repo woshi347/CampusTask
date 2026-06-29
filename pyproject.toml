@@ -1,6 +1,6 @@
 [project]
 name = "campus-task"
-version = "0.2.0"
+version = "0.2.1"
 description = "CampusTask - a CLI task management system for software engineering lab"
 authors = [{ name = "Zihan Zhang" }]
 
@@ -10,6 +10,9 @@ dependencies = []
 
 [project.optional-dependencies]
 dev = ["pytest>=7.0"]
+
+[project.scripts]
+campus-task = "campus_task.cli:main"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
